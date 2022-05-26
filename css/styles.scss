@@ -1,0 +1,143 @@
+﻿/* NE PAS MODIFIER CES STYLES */
+  /* Est associé à la carte lors de la génération des cartes */
+  .carte {
+    width: 150px;
+    height: 150px;
+    background-color: gray;
+    border: 1px solid black;
+  }
+  /* Est associé à la carte lors de la génération des cartes */
+  .bg-cover {
+      background-size: cover;
+  }
+  
+  /* Est associé à la carte lors de la génération des cartes */
+  .bg-hidden {
+      background-image: url("../images/hidden.png") !important;
+      
+  }
+  
+  /* Peu servir à cacher des éléments du DOM si besoin */
+  .hidden {
+      display: none !important;
+  }
+
+
+
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: verdana, sans-serif;
+    background-color: white;
+  }
+  
+  h2 {
+    font-size: 1.4em;
+  }
+  
+  #cartes img {
+    max-width: 100%;
+    
+  }
+  
+  
+  .container {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 90%;
+    padding: 20px;
+  }
+
+  #interface
+  {
+    background-color: white;
+    background-image:url(../images/45degreee_fabric.jpg);
+    background-repeat: repeat;
+    padding: 10px;
+    
+  }
+
+  #cartes
+  {
+    
+    background-color:gray;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .cache{
+    display: block;
+    opacity: 0;
+  }
+
+  /* ######## CODEZ VOS RÈGLES ICI ####### */
+  /* ##################################### */
+  /* ##################################### */
+
+  button{
+
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    background-color: #608000;
+    border-radius: 20px;
+    &:hover{
+      box-shadow: 5px 5px #679898;
+    }
+    
+  }
+
+  h1{
+    text-align: center;
+    text-shadow: 2px 2px #608000;
+
+  }
+
+  #champs{
+    display: flex;
+    
+    align-items:baseline ;
+    div{
+      margin: 10px;
+      display: flex;
+      
+      flex-direction: column;
+      input{margin-top: 5px;
+          padding: 10px;
+          border-radius: 10px;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: medium;
+          font-weight: 700;
+          text-align: center;
+      }
+      
+    }
+    
+  }
+
+  .flex-cartes{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    div{
+      margin-top: 10px;
+    }
+    
+  }
+
+  .imageFin{
+    align-self: center;
+    width: 50%;
+  }
+
+  .hurry{
+    background-color: red;
+  }
+.green{
+  background-color: green;
+}
+  .minuterie{align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;}
+  /*# sourceMappingURL=styles.css.map */
