@@ -14,6 +14,7 @@ let musiqueDeFond = new Audio(""); // Variable pour la musique de fond. Voir la 
 // VOS VARIABLES GLOBALES À COMPLÉTER ICI 
 let premiereCarte;
 let deuxiemeCarte;
+let tableauCartes =[];
 let pairesTrouvee = 0;
 
 let minuterieARepetitions = null;
@@ -71,43 +72,44 @@ function gererClickCarte(e) {
         //Point d'arrêt        
         carteClique.attr("data-estvisible", "oui");
 
+        
+        tableauCartes.push(carteClique);
         //Valider la premiere carte
-        if (premiereCarte == undefined) {
-            premiereCarte = $(carteClique);
-        } else {
-            deuxiemeCarte = $(carteClique);
+        console.log("Test du modulo de la longueur du tableau cartes: " + tableauCartes.length%2);
+        if (tableauCartes.length%2==0)
+         {       
+             console.log("Début vérification numero cartes");                    
             //Vérification du numero des cartes
-            if ($(premiereCarte).attr("data-numero") == $(deuxiemeCarte).attr("data-numero")) {
-                //mettre la fonction cacher la carte pour les deux cartes
-                /**-----METTRE SON REUSSITE ICI-------- */
+            if ($(tableauCartes[tableauCartes.length-2]).attr("data-numero") == $(tableauCartes[tableauCartes.length-1]).attr("data-numero")) {
                 jouerMusique("good.mp3");
-                cacherUneCarte(premiereCarte);
-                cacherUneCarte(deuxiemeCarte);
-                $(premiereCarte).off();
-                $(deuxiemeCarte).off();
-                premiereCarte = undefined;
-                deuxiemeCarte = undefined;
+                cacherUneCarte(tableauCartes[tableauCartes.length-2]);
+                cacherUneCarte(tableauCartes[tableauCartes.length-1]);
+                $(tableauCartes[tableauCartes.length-2]).off();
+                $(tableauCartes[tableauCartes.length-1]).off();
+                
                 pairesTrouvee++;
-
             }
             //Sinon retourner les cartes
             else {
                 /**-----METTRE SON ECHEC ICI-------- */
                 jouerMusique("wrong.wav");
-                premiereCarte.delay(1000).fadeOut(1000, function () {
-                    $(premiereCarte).addClass("bg-hidden").attr("data-estvisible", "non");
-                    premiereCarte = undefined
+                const carte1 = tableauCartes[tableauCartes.length-2];
+                const carte2 = tableauCartes[tableauCartes.length-1];
+                carte1.fadeOut(1000, function () {
+                    $(carte1).addClass("bg-hidden").attr("data-estvisible", "non");
+                    
                 }).fadeIn(1000);
-                deuxiemeCarte.delay(1000).fadeOut(1000, function () {
-                    $(deuxiemeCarte).addClass("bg-hidden").attr("data-estvisible", "non");
-                    deuxiemeCarte = undefined
+                carte2.fadeOut(1000, function () {
+                    $(carte2).addClass("bg-hidden").attr("data-estvisible", "non");   
                 }).fadeIn(1000);
+                
+            
             }
         }
 
         if (pairesTrouvee == $("#nbPaires").val()) {
             terminerPartie("victoire");
-            pairesTrouvee = 0;
+            
         }
         // On veut que la div occupe encore la même place dans le DOM, mais sans voir l'image (opacity)
 
@@ -221,10 +223,10 @@ function genererCartesDepart() {
 function terminerPartie(resultat) {
 
     //Vérification gagné ou pas
-    let nombrePairesTrouvees
+    
     console.log("-----DEBUT TERMINER PARTIE-----");
-    let pairesTrouvee = $("#cartes .cache");
-    console.log("Longueur du vecteur class=cache " + pairesTrouvee.length / 2);
+    let nombrePairesTrouvee = $("#cartes .cache");
+    console.log("Longueur du vecteur class=cache " + nombrePairesTrouvee.length / 2);
     console.log("Nombre de paires entrées " + $("#nbPaires").val());
 
     //Retirer les cartes de l'interface
@@ -257,6 +259,7 @@ function terminerPartie(resultat) {
     $("#cartes").removeClass("flex-cartes");
     $("#timer").html("");
     cartesDepart = [];
+    pairesTrouvee = 0;
     gererBtnMusiqueOff();
 
 }
@@ -395,7 +398,8 @@ function fairePlusieursFois() {
         jouerMusique("hurry.wav");
     }
 
-    console.log("Faire plusieurs fois " + (compteur1 - 1));
+    
+    
     $("#timer").html((compteur1 - 1));
     compteur1--;
     if (compteur1 == 0) {
